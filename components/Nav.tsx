@@ -23,7 +23,7 @@ export default function Nav() {
             <rect x="75" y="46" width="12" height="10" rx="3" fill="#1ECBE1" stroke="none" />
             <rect x="93" y="46" width="12" height="10" rx="3" fill="#1ECBE1" stroke="none" />
             <rect x="68" y="70" width="44" height="38" rx="14" />
-            <rect x="80" y="82" width="20" height="9" rx="3" strokeWidth="2" />
+            <text x="90" y="89.5" textAnchor="middle" fontFamily="ui-monospace, monospace" fontSize="9" fontWeight="700" fill="#1ECBE1" stroke="none">TJ</text>
             <rect x="74" y="108" width="12" height="15" rx="5" />
             <rect x="94" y="108" width="12" height="15" rx="5" />
             <rect x="55" y="76" width="11" height="28" rx="5" />
@@ -31,8 +31,9 @@ export default function Nav() {
             <g className="waveArm">
               <rect x="113" y="56" width="11" height="26" rx="5" />
               <circle cx="118" cy="52" r="6" />
-              <line x1="114" y1="47" x2="112" y2="40" strokeWidth="2" strokeLinecap="round" />
-              <line x1="122" y1="47" x2="124" y2="40" strokeWidth="2" strokeLinecap="round" />
+              <path d="M114 65 Q110 43 113 39" fill="none" strokeWidth="2" strokeLinecap="round" />
+              <line x1="118" y1="47" x2="118" y2="39" strokeWidth="2" strokeLinecap="round" />
+              <path d="M122 65 Q126 43 123 39" fill="none" strokeWidth="2" strokeLinecap="round" />
             </g>
           </g>
         </svg>

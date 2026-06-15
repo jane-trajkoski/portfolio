@@ -10,7 +10,7 @@ export default function ForgeBot() {
         <rect x="41" y="46" width="12" height="10" rx="3" fill="#1ECBE1" stroke="none" />
         <rect x="59" y="46" width="12" height="10" rx="3" fill="#1ECBE1" stroke="none" />
         <rect x="34" y="70" width="44" height="38" rx="14" />
-        <rect x="46" y="82" width="20" height="9" rx="3" strokeWidth="1.5" />
+        <text x="56" y="89.5" textAnchor="middle" fontFamily="ui-monospace, monospace" fontSize="9" fontWeight="700" fill="#1ECBE1" stroke="none">TJ</text>
         <rect x="40" y="108" width="12" height="15" rx="5" />
         <rect x="60" y="108" width="12" height="15" rx="5" />
         <rect x="21" y="76" width="11" height="28" rx="5" />
