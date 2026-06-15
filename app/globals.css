@@ -179,6 +179,17 @@ h1,h2,h3{margin:0}
   .form .row{flex-direction:column}
   .articletitle{font-size:30px}
 }
+/* rocket scroll-to-top */
+.scrolltop{position:fixed;right:22px;bottom:22px;z-index:60;width:54px;height:54px;border-radius:50%;border:1.6px solid transparent;background:linear-gradient(#0b1a2a,#0b1a2a) padding-box,var(--grad) border-box;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 0 18px rgba(30,203,225,.25);animation:stIn .3s ease;transition:box-shadow .15s}
+.scrolltop:hover{box-shadow:0 0 24px rgba(30,203,225,.5)}
+@keyframes stIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.scrolltop svg{position:relative;z-index:2}
+.flame{position:absolute;bottom:7px;left:50%;width:11px;height:0;transform:translateX(-50%);border-radius:0 0 60% 60%;background:linear-gradient(180deg,#FFFFFF,#7FE6FF 35%,#1ECBE1 70%,transparent);opacity:0;z-index:1}
+.scrolltop.launch{animation:launch .95s cubic-bezier(.5,0,.9,.5) forwards}
+@keyframes launch{0%{transform:translateY(0) scale(1)}14%{transform:translateY(6px) scale(1.03)}100%{transform:translateY(-130vh) scale(.45)}}
+.scrolltop.launch .flame{animation:flame .95s ease-in forwards}
+@keyframes flame{0%{height:0;opacity:0}16%{height:12px;opacity:1}100%{height:40px;opacity:.95}}
+
 @media (prefers-reduced-motion: reduce){
   *{animation:none !important}
 }

@@ -31,8 +31,8 @@ export default function Nav() {
             <g className="waveArm">
               <rect x="113" y="56" width="11" height="26" rx="5" />
               <circle cx="118" cy="52" r="6" />
-              <line x1="127" y1="46" x2="132" y2="42" strokeWidth="2" strokeLinecap="round" />
-              <line x1="128" y1="54" x2="134" y2="53" strokeWidth="2" strokeLinecap="round" />
+              <line x1="114" y1="47" x2="112" y2="40" strokeWidth="2" strokeLinecap="round" />
+              <line x1="122" y1="47" x2="124" y2="40" strokeWidth="2" strokeLinecap="round" />
             </g>
           </g>
         </svg>
