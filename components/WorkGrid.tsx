@@ -1,5 +1,4 @@
 import ForgeBot from "./ForgeBot";
-import GalaxyStars from "./GalaxyStars";
 import ProjectCard, { type Project } from "./ProjectCard";
 
 const PROJECTS: Project[] = [
@@ -28,22 +27,18 @@ export default function WorkGrid() {
       ))}
 
       <div className="card mc soon">
-        <div className="mc-stage">
-          <div className="neb" />
-          <GalaxyStars />
-          <div className="mcard dashed">
-            <div className="mc-strip">tjforge</div>
-            <div className="mc-screen mc-forge">
-              <ForgeBot />
-            </div>
-            <div className="mc-label">NO DATA</div>
-            <div className="mc-chip" />
+        <div className="soon-head">
+          <p className="soon-title">Coming soon</p>
+          <p className="soon-load">
+            <span className="pd" /> loading&hellip;
+          </p>
+          <div className="mc-progress">
+            <span />
           </div>
         </div>
-        <p className="ctitle muted">Coming soon</p>
-        <p className="cstack muted">in progress&hellip;</p>
-        <div className="mc-progress">
-          <span />
+        <div className="soon-bot">
+          <div className="neb" />
+          <ForgeBot />
         </div>
       </div>
     </div>
