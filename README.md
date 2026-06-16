@@ -1,8 +1,7 @@
-# tjforge.dev
+# tjdev.io
 
 The portfolio + blog for TJ, a solo developer. Built with **Next.js (App Router)**.
-Features the line-art mascot **Forge** with a small personality state machine, a
-forging "in-progress" card, a contact form, a markdown-rendered blog, and a custom
+Features the line-art mascot **TJ** 
 404. Deep-navy + electric-cyan palette inspired by Astro Bot.
 
 ## Run it
@@ -17,13 +16,6 @@ npm run build && npm run start   # production
 ```
 
 It runs out of the box with bundled sample blog posts — no CMS or env vars needed.
-
-## Deploy (Vercel)
-
-1. Push this folder to a Git repo.
-2. Import the repo at vercel.com (framework auto-detected as Next.js).
-3. Add the env vars from `.env.example` if/when you connect a CMS.
-4. Point your domain `tjforge.dev` at the project.
 
 ## Where the blog comes from
 

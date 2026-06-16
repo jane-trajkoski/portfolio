@@ -5,7 +5,7 @@ import { getAllPosts } from "@/lib/posts";
 import { formatDate } from "@/lib/format";
 
 export const metadata = {
-  title: "Blog — tjforge.dev",
+  title: "Blog — tjdev.io",
   description: "Notes on building software, games, and the web.",
 };
 

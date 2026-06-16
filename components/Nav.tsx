@@ -6,7 +6,8 @@ export default function Nav() {
       <Link href="/" className="brand">
         <span className="tjsq">TJ</span>
         <span>
-          <span className="dotdev">.dev</span>
+          dev
+          <span className="dotdev">.io</span>
         </span>
       </Link>
       <div className="nlinks">

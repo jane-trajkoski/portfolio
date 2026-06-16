@@ -13,8 +13,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const post = await getPostBySlug(params.slug);
-  if (!post) return { title: "Not found — tjforge.dev" };
-  return { title: `${post.title} — tjforge.dev`, description: post.summary };
+  if (!post) return { title: "Not found — tjdev.io" };
+  return { title: `${post.title} — tjdev.io`, description: post.summary };
 }
 
 export default async function PostPage({ params }: { params: { slug: string } }) {

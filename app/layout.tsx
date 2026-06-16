@@ -4,7 +4,7 @@ import Starfield from "@/components/Starfield";
 import ScrollTop from "@/components/ScrollTop";
 
 export const metadata: Metadata = {
-  title: "tjforge.dev — TJ, solo developer",
+  title: "tjdev.io — TJ, solo developer",
   description:
     "Solo developer. Problem solver. Lifelong gamer. I forge fast, playful software that ships.",
 };
