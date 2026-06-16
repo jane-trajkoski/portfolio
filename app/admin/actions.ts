@@ -109,3 +109,18 @@ export async function saveSettings(formData: FormData) {
   await prisma.settings.upsert({ where: { id: 1 }, update: data, create: { id: 1, ...data } });
   redirect("/admin");
 }
+
+export async function markMessageRead(formData: FormData) {
+  assertAdmin();
+  await prisma.message.update({
+    where: { id: String(formData.get("id")) },
+    data: { read: String(formData.get("read")) === "1" },
+  });
+  redirect("/admin");
+}
+
+export async function deleteMessage(formData: FormData) {
+  assertAdmin();
+  await prisma.message.delete({ where: { id: String(formData.get("id")) } });
+  redirect("/admin");
+}

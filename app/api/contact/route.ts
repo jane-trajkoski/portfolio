@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { prisma } from "@/lib/db";
 
 export const runtime = "nodejs";
 
@@ -18,23 +19,33 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Missing fields" }, { status: 400 });
   }
 
-  const key = process.env.RESEND_API_KEY;
-  if (!key) {
-    return NextResponse.json({ ok: false, error: "Email not configured" }, { status: 500 });
+  let delivered = false;
+
+  // 1) Store in the database (backup inbox in /admin)
+  if (process.env.DATABASE_URL) {
+    try {
+      await prisma.message.create({ data: { name, email, message } });
+      delivered = true;
+    } catch {}
   }
 
-  try {
-    const resend = new Resend(key);
-    const { error } = await resend.emails.send({
-      from: process.env.CONTACT_FROM || "tjdev.io <noreply@tjdev.io>",
-      to: process.env.CONTACT_TO || "hello@tjdev.io",
-      replyTo: email,
-      subject: `New message from ${name}`,
-      text: `From: ${name} <${email}>\n\n${message}`,
-    });
-    if (error) throw new Error(String(error));
-    return NextResponse.json({ ok: true });
-  } catch {
-    return NextResponse.json({ ok: false, error: "Send failed" }, { status: 500 });
+  // 2) Email via Resend
+  if (process.env.RESEND_API_KEY) {
+    try {
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      const { error } = await resend.emails.send({
+        from: process.env.CONTACT_FROM || "tjdev.io <noreply@tjdev.io>",
+        to: process.env.CONTACT_TO || "hello@tjdev.io",
+        replyTo: email,
+        subject: `New message from ${name}`,
+        text: `From: ${name} <${email}>\n\n${message}`,
+      });
+      if (!error) delivered = true;
+    } catch {}
   }
+
+  if (!delivered) {
+    return NextResponse.json({ ok: false, error: "Could not deliver" }, { status: 500 });
+  }
+  return NextResponse.json({ ok: true });
 }

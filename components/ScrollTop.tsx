@@ -2,9 +2,29 @@
 
 import { useEffect, useState } from "react";
 
-// Rocket "back to top" button. Appears once you've scrolled past ~half a
-// viewport; on click it fires its thruster, smooth-scrolls to the top, and
-// streaks off the top of the screen into the starfield.
+// Keep in sync with the CSS launch duration (.scrolltop.launch in globals.css).
+const FLIGHT_MS = 1500;
+
+// Scroll to top with the same feel as the rocket: slow at the start,
+// accelerating toward the end (easeInCubic). Instant jump if reduced motion.
+function flyToTop(duration: number) {
+  if (typeof window === "undefined") return;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const start = window.scrollY;
+  if (reduce || start === 0) {
+    window.scrollTo(0, 0);
+    return;
+  }
+  const t0 = performance.now();
+  function step(now: number) {
+    const t = Math.min((now - t0) / duration, 1);
+    const eased = t * t * t;
+    window.scrollTo(0, Math.round(start * (1 - eased)));
+    if (t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
 export default function ScrollTop() {
   const [visible, setVisible] = useState(false);
   const [launching, setLaunching] = useState(false);
@@ -21,11 +41,11 @@ export default function ScrollTop() {
   function launch() {
     if (launching) return;
     setLaunching(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    flyToTop(FLIGHT_MS);
     window.setTimeout(() => {
       setLaunching(false);
       setVisible(false);
-    }, 1600);
+    }, FLIGHT_MS + 150);
   }
 
   if (!visible && !launching) return null;

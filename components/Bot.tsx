@@ -88,9 +88,9 @@ export default function Bot() {
           <g className="eyes-sleep">
             <line x1="76" y1="51" x2="104" y2="51" strokeWidth="3" strokeLinecap="round" />
           </g>
-          <g className="eyes-happy" fill="none" stroke="#1ECBE1" strokeWidth="3" strokeLinecap="round">
-            <path d="M76 53 Q81 46 86 53" />
-            <path d="M94 53 Q99 46 104 53" />
+          <g className="eyes-happy" fill="#1ECBE1" stroke="none">
+            <path d="M74.5 52 A6.5 6.5 0 0 1 87.5 52 Q81 49.4 74.5 52 Z" />
+            <path d="M92.5 52 A6.5 6.5 0 0 1 105.5 52 Q99 49.4 92.5 52 Z" />
           </g>
           <g className="eyes-think">
             <circle className="te-l" cx="81" cy="51" r="6" fill="#1ECBE1" stroke="none" />

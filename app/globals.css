@@ -1711,3 +1711,11 @@ h1, h2, h3 {
   .mc-shot{opacity:1;animation:none}
   .helloBot{opacity:1;transform:translate(0,0) rotate(-15deg) scale(1)}
 }
+
+
+/* admin inbox */
+.adm-msg{background:rgba(10,24,41,.5);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.adm-msg.unread{border-color:rgba(30,203,225,.45)}
+.adm-msg-top{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px;flex-wrap:wrap}
+.adm-msg-body{margin:8px 0 0;font-size:14px;color:#cdd8ec;white-space:pre-wrap;line-height:1.5}
+.adm-date{font-family:var(--mono);font-size:12px;color:var(--muted)}

@@ -1,16 +1,17 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 import { assertAdmin } from "@/lib/auth";
-import { logout, deletePost, deleteProject, saveSettings } from "./actions";
+import { logout, deletePost, deleteProject, saveSettings, deleteMessage, markMessageRead } from "./actions";
 
 export const dynamic = "force-dynamic";
 
 export default async function Admin() {
   assertAdmin();
-  const [posts, projects, s] = await Promise.all([
+  const [posts, projects, s, messages] = await Promise.all([
     prisma.post.findMany({ orderBy: { date: "desc" } }),
     prisma.project.findMany({ orderBy: { order: "asc" } }),
     prisma.settings.findUnique({ where: { id: 1 } }),
+    prisma.message.findMany({ orderBy: { createdAt: "desc" } }),
   ]);
 
   return (
@@ -22,6 +23,37 @@ export default async function Admin() {
             <button className="adm-del" type="submit">log out</button>
           </form>
         </div>
+
+        <div className="adm-card">
+          <h2 className="adm-h">Inbox{messages.filter((m) => !m.read).length ? ` (${messages.filter((m) => !m.read).length} new)` : ""}</h2>
+          {messages.length === 0 ? (
+            <p className="cstack">No messages yet.</p>
+          ) : (
+            <div className="adm-list">
+              {messages.map((m) => (
+                <div className={"adm-msg" + (m.read ? "" : " unread")} key={m.id}>
+                  <div className="adm-msg-top">
+                    <span><strong>{m.name}</strong> <a className="adm-link" href={`mailto:${m.email}`}>{m.email}</a></span>
+                    <span className="adm-row">
+                      <span className="adm-date">{new Date(m.createdAt).toLocaleDateString()}</span>
+                      <form action={markMessageRead}>
+                        <input type="hidden" name="id" value={m.id} />
+                        <input type="hidden" name="read" value={m.read ? "0" : "1"} />
+                        <button className="adm-link" type="submit">{m.read ? "mark unread" : "mark read"}</button>
+                      </form>
+                      <form action={deleteMessage}>
+                        <input type="hidden" name="id" value={m.id} />
+                        <button className="adm-del" type="submit">delete</button>
+                      </form>
+                    </span>
+                  </div>
+                  <p className="adm-msg-body">{m.message}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
 
         <div className="adm-card">
           <h2 className="adm-h">Site / hero</h2>
