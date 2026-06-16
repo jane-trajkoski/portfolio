@@ -1,5 +1,5 @@
 import GalaxyStars from "./GalaxyStars";
-import type { Project } from "../lib/projects";
+import type { Project } from "@/lib/projects";
 
 export default function ProjectCard({ project }: { project: Project }) {
   const chips = [...project.stack, ...project.stack];
@@ -22,6 +22,16 @@ export default function ProjectCard({ project }: { project: Project }) {
                 <rect x="68" y="70" width="44" height="24" rx="12" />
               </g>
             </svg>
+            {project.image ? (
+              <span
+                className="mc-shot"
+                style={{ backgroundImage: `url(${project.image})` }}
+                role="img"
+                aria-label={project.imageAlt || project.title}
+              />
+            ) : null}
+            <span className="mc-scan" aria-hidden="true" />
+            <span className="mc-screenglow" aria-hidden="true" />
           </div>
           <div className="mc-label">PROJECT CARD</div>
           <div className="mc-chip" />

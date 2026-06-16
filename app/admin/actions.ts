@@ -59,6 +59,16 @@ export async function deletePost(formData: FormData) {
 export async function saveProject(formData: FormData) {
   assertAdmin();
   const id = String(formData.get("id") || "");
+
+  let image = String(formData.get("image") || "").trim();
+  const file = formData.get("imageFile") as File | null;
+  if (file && typeof file === "object" && file.size > 0) {
+    const { put } = await import("@vercel/blob");
+    const safe = file.name.replace(/[^a-zA-Z0-9.-]+/g, "-");
+    const blob = await put(`projects/${Date.now()}-${safe}`, file, { access: "public" });
+    image = blob.url;
+  }
+
   const data = {
     title: String(formData.get("title") || ""),
     tagline: String(formData.get("tagline") || ""),
@@ -70,6 +80,8 @@ export async function saveProject(formData: FormData) {
     blog: String(formData.get("blog") || "/blog"),
     featured: formData.get("featured") === "on",
     order: Number(formData.get("order") || 0),
+    image: image || null,
+    imageAlt: String(formData.get("imageAlt") || "") || null,
   };
   if (id) await prisma.project.update({ where: { id }, data });
   else await prisma.project.create({ data });

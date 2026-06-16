@@ -24,7 +24,7 @@ body {
     position: relative;
     background: #01040a;
     color: #E7EEF7;
-    font-family: Orbitron, system-ui, -apple-system, sans-serif;
+    font-family: var(--font-roboto), system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased
 }
 
@@ -1221,7 +1221,7 @@ h1, h2, h3 {
 }
 
 .scrolltop.launch {
-    animation: launch .95s cubic-bezier(.5, 0, .9, .5) forwards
+    animation: launch 1.5s cubic-bezier(0.6,0,0.9,0.15) forwards;
 }
 
 @keyframes launch {
@@ -1237,7 +1237,7 @@ h1, h2, h3 {
 }
 
 .scrolltop.launch .flame {
-    animation: flame .95s ease-in forwards
+    animation: flame 1.5s ease-in forwards
 }
 
 @keyframes flame {
@@ -1686,4 +1686,28 @@ h1, h2, h3 {
     * {
         animation: none !important
     }
+}
+
+
+/* project screen image (boot-up reveal) */
+.mc-screen{position:relative}
+.mc-shot{position:absolute;inset:0;background-size:cover;background-position:center;border-radius:inherit;opacity:0;transition:opacity .35s ease}
+.card:hover .mc-shot{opacity:1;animation:boot .5s ease}
+@keyframes boot{0%{opacity:0;filter:brightness(1.7) saturate(.6)}100%{opacity:1;filter:none}}
+.mc-scan{position:absolute;inset:0;border-radius:inherit;background:repeating-linear-gradient(180deg,transparent 0 2px,rgba(0,0,0,.16) 2px 4px);mix-blend-mode:overlay;pointer-events:none}
+.mc-screenglow{position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 16px rgba(30,203,225,.22);pointer-events:none}
+
+/* desktop sizing — bigger memory card + galaxy so the image preview reads */
+@media (min-width:760px){
+  .mcard{width:150px;height:182px}
+  .mc-screen > svg{width:66px;height:auto}
+  .neb{width:214px;height:192px}
+  .gstars{transform:translate(-50%,-50%) scale(1.32)}
+}
+
+/* touch devices (no hover): reveal buttons + image by default, keep hello bot peeking */
+@media (hover:none){
+  .acts .psbtn{opacity:1;transform:none}
+  .mc-shot{opacity:1;animation:none}
+  .helloBot{opacity:1;transform:translate(0,0) rotate(-15deg) scale(1)}
 }

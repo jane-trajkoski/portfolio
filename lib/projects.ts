@@ -8,6 +8,8 @@ export type Project = {
   live: string;
   blog: string;
   featured?: boolean;
+  image?: string | null;
+  imageAlt?: string | null;
 };
 
 const hasDb = !!process.env.DATABASE_URL;
@@ -44,6 +46,8 @@ export async function getProjects(): Promise<Project[]> {
       live: r.live,
       blog: r.blog,
       featured: r.featured,
+      image: r.image,
+      imageAlt: r.imageAlt,
     }));
   } catch {
     return sample;

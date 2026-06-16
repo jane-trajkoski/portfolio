@@ -26,6 +26,16 @@ export default async function EditProject({ params }: { params: { id: string } }
             <input className="adm-in" name="live" defaultValue={p?.live ?? "#"} placeholder="live url" />
             <input className="adm-in" name="blog" defaultValue={p?.blog ?? "/blog"} placeholder="blog url" />
           </div>
+          {p?.image ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={p.image} alt={p?.imageAlt ?? ""} style={{ width: 120, borderRadius: 8, border: "1px solid rgba(148,163,184,.25)" }} />
+          ) : null}
+          <label className="adm-link">
+            upload image
+            <input className="adm-in" type="file" name="imageFile" accept="image/*" />
+          </label>
+          <input className="adm-in" name="image" defaultValue={p?.image ?? ""} placeholder="...or paste an image URL (leave file empty)" />
+          <input className="adm-in" name="imageAlt" defaultValue={p?.imageAlt ?? ""} placeholder="image alt text" />
           <div className="adm-row">
             <input className="adm-in" name="order" type="number" defaultValue={p?.order ?? 0} placeholder="order" />
             <label className="adm-link"><input type="checkbox" name="featured" defaultChecked={p?.featured ?? false} /> featured</label>

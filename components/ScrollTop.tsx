@@ -25,7 +25,7 @@ export default function ScrollTop() {
     window.setTimeout(() => {
       setLaunching(false);
       setVisible(false);
-    }, 950);
+    }, 1600);
   }
 
   if (!visible && !launching) return null;

@@ -2,17 +2,33 @@
 
 import { useState } from "react";
 
-// "Say hello" form. On submit it swaps to the success mascot.
-// Wire the actual send to your email/form service in the handler below
-// (e.g. Formspree, Resend, or a Next.js route handler at app/api/contact).
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // const data = new FormData(e.currentTarget);
-    // await fetch("/api/contact", { method: "POST", body: data });
-    setSent(true);
+    setBusy(true);
+    setError(null);
+    const fd = new FormData(e.currentTarget);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fd.get("name"),
+          email: fd.get("email"),
+          message: fd.get("message"),
+        }),
+      });
+      if (!res.ok) throw new Error();
+      setSent(true);
+    } catch {
+      setError("Couldn't send right now — email me directly at hello@tjdev.io.");
+    } finally {
+      setBusy(false);
+    }
   }
 
   if (sent) {
@@ -51,8 +67,9 @@ export default function ContactForm() {
         <input type="email" name="email" placeholder="your email" required />
       </div>
       <textarea name="message" placeholder="what are you building?" required />
-      <button type="submit" className="send">
-        send it &rarr;
+      {error ? <p className="adm-err">{error}</p> : null}
+      <button type="submit" className="send" disabled={busy}>
+        {busy ? "sending…" : "send it →"}
       </button>
     </form>
   );
