@@ -7,7 +7,7 @@
     --white: #FFFFFF;
     --line: rgba(148, 163, 184, .16);
     --line2: rgba(148, 163, 184, .22);
-    --mono: ui-monospace, 'SF Mono', Menlo, monospace;
+    --mono: var(--font-orbitron), sans-serif, monospace;
     --grad: linear-gradient(120deg, #1ECBE1, #7FE6FF 45%, #FFFFFF 60%, #1ECBE1);
 }
 
@@ -24,7 +24,7 @@ body {
     position: relative;
     background: #01040a;
     color: #E7EEF7;
-    font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-family: Orbitron, system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased
 }
 
@@ -234,7 +234,8 @@ h1, h2, h3 {
     line-height: 1.02;
     font-weight: 600;
     margin: 0 0 22px;
-    letter-spacing: -2px
+    letter-spacing: -2px;
+    font-family: var(--mono);
 }
 
 .hero h1 .c {
@@ -1099,6 +1100,7 @@ h1, h2, h3 {
 
 .nf-title {
     font-size: 30px;
+    font-family: var(--mono), sans-serif;
     font-weight: 600;
     letter-spacing: -.5px;
     margin: 18px 0 8px

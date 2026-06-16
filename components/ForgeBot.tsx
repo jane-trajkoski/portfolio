@@ -7,10 +7,11 @@ export default function ForgeBot() {
         <line x1="56" y1="34" x2="56" y2="22" strokeLinecap="round" />
         <circle cx="56" cy="19" r="3.5" fill="#1ECBE1" stroke="none" />
         <rect x="30" y="34" width="52" height="34" rx="12" />
-        <rect x="41" y="46" width="12" height="10" rx="3" fill="#1ECBE1" stroke="none" />
-        <rect x="59" y="46" width="12" height="10" rx="3" fill="#1ECBE1" stroke="none" />
+        <circle cx="47" cy="51" r="5" fill="#1ECBE1" stroke="none" />
+        <circle cx="65" cy="51" r="5" fill="#1ECBE1" stroke="none" />
+        <circle cx="56" cy="19" r="3.5" fill="#1ECBE1" stroke="none" />
         <rect x="34" y="70" width="44" height="38" rx="14" />
-        <text x="56" y="89.5" textAnchor="middle" fontFamily="ui-monospace, monospace" fontSize="9" fontWeight="700" fill="#1ECBE1" stroke="none">TJ</text>
+        <text x="56" y="89.5" textAnchor="middle" fontFamily="var(--font-orbitron)" fontSize="9" fontWeight="700" fill="#1ECBE1" stroke="none">TJ</text>
         <rect x="40" y="108" width="12" height="15" rx="5" />
         <rect x="60" y="108" width="12" height="15" rx="5" />
         <rect x="21" y="76" width="11" height="28" rx="5" />

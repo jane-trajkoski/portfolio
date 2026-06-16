@@ -18,7 +18,7 @@ export default function NotFound() {
             <line x1="92" y1="46" x2="102" y2="56" strokeWidth="2.4" strokeLinecap="round" />
             <line x1="102" y1="46" x2="92" y2="56" strokeWidth="2.4" strokeLinecap="round" />
             <rect x="64" y="70" width="44" height="38" rx="14" />\
-            <text x="86" y="89.5" textAnchor="middle" fontFamily="ui-monospace, monospace" fontSize="9" fontWeight="700" fill="#1ECBE1" stroke="none">TJ</text>
+            <text x="86" y="89.5" textAnchor="middle" fontFamily="var(--font-orbitron)" fontSize="9" fontWeight="700" fill="#1ECBE1" stroke="none">TJ</text>
             <rect x="70" y="108" width="12" height="15" rx="5" />
             <rect x="90" y="108" width="12" height="15" rx="5" />
             <rect x="51" y="76" width="11" height="28" rx="5" />
@@ -44,7 +44,7 @@ export default function NotFound() {
             </g>
           </g>
         </svg>
-        <h1 className="nf-title">404 — lost in the workshop</h1>
+        <h1 className="nf-title">404 — lost in space</h1>
         <p className="nf-sub">This page wandered off. Let&apos;s get you back.</p>
         <div className="cta">
           <Link href="/" className="b1">back home</Link>
