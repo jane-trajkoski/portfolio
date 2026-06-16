@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next"
 import Starfield from "@/components/Starfield";
 import ScrollTop from "@/components/ScrollTop";
 import { Roboto, Orbitron } from "next/font/google";
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <div className="nebula" aria-hidden="true" />
     {children}
     <ScrollTop />
+    <Analytics />
     </body>
     </html>
   );

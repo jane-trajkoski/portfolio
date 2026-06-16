@@ -1,64 +1,58 @@
-// Blog data layer.
-//
-// Everything the app needs from "the blog" goes through getAllPosts() and
-// getPostBySlug(). Swap the CMS by implementing those two functions for your
-// provider — the rest of the site never changes.
-//
-// Out of the box this returns the bundled sample posts so the site runs with
-// zero config. Set CMS_PROVIDER=sanity (+ env vars) to pull from Sanity.
+import { prisma } from "./db";
 
 export type Post = {
   slug: string;
   title: string;
-  date: string; // ISO date, e.g. "2026-06-10"
+  date: string; // ISO
   summary: string;
   tags?: string[];
   body: string; // markdown
 };
 
-const provider = process.env.CMS_PROVIDER || "sample";
+const hasDb = !!process.env.DATABASE_URL;
+
+function toPost(r: {
+  slug: string;
+  title: string;
+  date: Date;
+  summary: string;
+  tags: string[];
+  body: string;
+}): Post {
+  return {
+    slug: r.slug,
+    title: r.title,
+    date: r.date instanceof Date ? r.date.toISOString() : String(r.date),
+    summary: r.summary,
+    tags: r.tags,
+    body: r.body,
+  };
+}
+
+async function sample(): Promise<Post[]> {
+  const { samplePosts } = await import("./sample-posts");
+  return [...samplePosts].sort((a, b) => +new Date(b.date) - +new Date(a.date));
+}
 
 export async function getAllPosts(): Promise<Post[]> {
-  const posts = await load();
-  return [...posts].sort((a, b) => +new Date(b.date) - +new Date(a.date));
-}
-
-export async function getPostBySlug(slug: string): Promise<Post | null> {
-  const posts = await load();
-  return posts.find((p) => p.slug === slug) || null;
-}
-
-async function load(): Promise<Post[]> {
-  switch (provider) {
-    case "sanity":
-      return fromSanity();
-    // case "contentful": return fromContentful();
-    // case "notion":     return fromNotion();
-    default:
-      return (await import("./sample-posts")).samplePosts;
+  if (!hasDb) return sample();
+  try {
+    const rows = await prisma.post.findMany({
+      where: { published: true },
+      orderBy: { date: "desc" },
+    });
+    return rows.map(toPost);
+  } catch {
+    return sample();
   }
 }
 
-// --- Sanity adapter -------------------------------------------------------
-// Assumes a `post` document type with fields: title, slug, date, summary,
-// tags, and a `body` string holding markdown (e.g. via the sanity markdown
-// plugin). Adjust the GROQ projection to match your schema.
-async function fromSanity(): Promise<Post[]> {
-  const id = process.env.SANITY_PROJECT_ID;
-  const dataset = process.env.SANITY_DATASET || "production";
-  if (!id) throw new Error("SANITY_PROJECT_ID is not set");
-
-  const query =
-    '*[_type == "post" && defined(slug.current)]{' +
-    '"slug": slug.current, title, "date": coalesce(date, _createdAt), summary, tags, body' +
-    "}";
-  const url =
-    `https://${id}.api.sanity.io/v2023-05-03/data/query/${dataset}` +
-    `?query=${encodeURIComponent(query)}`;
-
-  // revalidate every 5 min (Next.js ISR). Bump or set to 0 as you like.
-  const res = await fetch(url, { next: { revalidate: 300 } });
-  if (!res.ok) throw new Error(`Sanity fetch failed: ${res.status}`);
-  const json = (await res.json()) as { result: Post[] };
-  return json.result || [];
+export async function getPostBySlug(slug: string): Promise<Post | null> {
+  if (!hasDb) return (await sample()).find((p) => p.slug === slug) ?? null;
+  try {
+    const r = await prisma.post.findUnique({ where: { slug } });
+    return r ? toPost(r) : null;
+  } catch {
+    return (await sample()).find((p) => p.slug === slug) ?? null;
+  }
 }

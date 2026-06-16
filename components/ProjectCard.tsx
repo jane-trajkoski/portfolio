@@ -1,17 +1,6 @@
 import GalaxyStars from "./GalaxyStars";
+import type { Project } from "../lib/projects";
 
-export type Project = {
-  title: string;
-  tagline: string;
-  stack: string[];
-  live: string;
-  blog: string;
-  featured?: boolean;
-};
-
-// A project as a console "save card": memory-card graphic over a galaxy
-// cluster, gradient action buttons that fan out on hover, and an infinitely
-// scrolling tech-stack ticker along the bottom.
 export default function ProjectCard({ project }: { project: Project }) {
   const chips = [...project.stack, ...project.stack];
 
@@ -21,7 +10,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         <div className="neb" />
         <GalaxyStars />
         <div className="mcard">
-          <div className="mc-strip">tj</div>
+          <div className="mc-strip">tjdev</div>
           <div className="mc-screen">
             <svg width="50" height="42" viewBox="0 0 180 150" aria-hidden="true">
               <g stroke="#1ECBE1" strokeWidth="3" fill="#0A1829" strokeLinejoin="round">

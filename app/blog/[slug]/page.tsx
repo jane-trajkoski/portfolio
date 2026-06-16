@@ -3,13 +3,12 @@ import { notFound } from "next/navigation";
 import { marked } from "marked";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import { getAllPosts, getPostBySlug } from "@/lib/posts";
+import { getPostBySlug } from "@/lib/posts";
 import { formatLongDate } from "@/lib/format";
 
-export async function generateStaticParams() {
-  const posts = await getAllPosts();
-  return posts.map((p) => ({ slug: p.slug }));
-}
+export const dynamic = "force-dynamic";
+
+
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const post = await getPostBySlug(params.slug);

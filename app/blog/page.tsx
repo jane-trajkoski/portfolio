@@ -9,6 +9,8 @@ export const metadata = {
   description: "Notes on building software, games, and the web.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function BlogIndex() {
   const posts = await getAllPosts();
 
