@@ -49,7 +49,7 @@ export default function Bot() {
     };
     const goThink = () => {
       go("think");
-      bubbleStart.current = setTimeout(startBubbles, 5000);
+      bubbleStart.current = setTimeout(startBubbles, 900);
     };
     const wake = () => {
       stopBubbles();

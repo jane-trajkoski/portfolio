@@ -777,26 +777,45 @@ h1, h2, h3 {
 .arm {
     transform-box: view-box;
     transform-origin: 78px 72px;
-    animation: swing 1.2s ease-in-out infinite
+    animation: swing 2s ease-in infinite;
 }
 
 .spark {
     opacity: 0;
-    animation: spark 1.2s ease-out infinite
+    animation: spark 2s ease-out infinite
 }
+
 
 @keyframes swing {
-    0%, 32% {
-        transform: rotate(30deg)
+    0%, 25% {
+        transform: rotate(30deg);
     }
-    55%, 60% {
-        transform: rotate(105deg)
+
+    /* fast hit */
+    42% {
+        transform: rotate(105deg);
     }
-    100% {
-        transform: rotate(30deg)
+
+    /* small recoil bounce */
+    48% {
+        transform: rotate(97deg);
+    }
+
+    /* comes back down slightly */
+    53% {
+        transform: rotate(100deg);
+    }
+
+    /* hold on anvil */
+    53%, 72% {
+        transform: rotate(100deg);
+    }
+
+    /* pull back up */
+    90%, 100% {
+        transform: rotate(30deg);
     }
 }
-
 @keyframes spark {
     0%, 52% {
         opacity: 0

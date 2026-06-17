@@ -17,10 +17,10 @@ export default function ForgeBot() {
         <rect x="21" y="76" width="11" height="28" rx="5" />
         <circle cx="26" cy="106" r="5" />
         <circle cx="78" cy="72" r="3" />
-        <polygon points="100,86 90,89 100,95" />
-        <rect x="100" y="84" width="44" height="11" rx="2" />
-        <rect x="114" y="95" width="12" height="9" />
-        <rect x="104" y="104" width="34" height="7" rx="2" />
+        <polygon points="100,90 90,90 103,99" />
+        <rect x="100" y="90" width="44" height="11" rx="2" />
+        <rect x="114" y="101" width="12" height="9" />
+        <rect x="104" y="110" width="34" height="7" rx="2" />
         <g className="arm">
           <rect x="73" y="50" width="10" height="24" rx="5" />
           <circle cx="78" cy="48" r="5" />
@@ -29,9 +29,9 @@ export default function ForgeBot() {
         </g>
       </g>
       <g className="spark" fill="none" stroke="#1ECBE1" strokeWidth="2" strokeLinecap="round">
-        <line x1="122" y1="82" x2="128" y2="75" />
-        <line x1="126" y1="85" x2="134" y2="84" />
-        <line x1="118" y1="85" x2="114" y2="78" />
+        <line x1="122" y1="89" x2="128" y2="75" />
+        <line x1="126" y1="92" x2="134" y2="84" />
+        <line x1="118" y1="92" x2="114" y2="78" />
         <circle cx="132" cy="77" r="1.6" fill="#1ECBE1" stroke="none" />
         <circle cx="116" cy="76" r="1.4" fill="#1ECBE1" stroke="none" />
       </g>
