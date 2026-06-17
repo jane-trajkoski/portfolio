@@ -816,15 +816,31 @@ h1, h2, h3 {
         transform: rotate(30deg);
     }
 }
+
 @keyframes spark {
-    0%, 52% {
-        opacity: 0
+    0%, 43% {
+        opacity: 0;
     }
+
+    /* first impact spark */
+    45% {
+        opacity: 1;
+    }
+    48% {
+        opacity: 0;
+    }
+
+    /* second micro-hit spark */
     57% {
-        opacity: 1
+        opacity: 1;
     }
-    72%, 100% {
-        opacity: 0
+    60% {
+        opacity: 0;
+    }
+
+    /* rest */
+    60%, 100% {
+        opacity: 0;
     }
 }
 
